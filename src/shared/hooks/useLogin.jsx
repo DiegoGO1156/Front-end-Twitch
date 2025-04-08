@@ -24,6 +24,7 @@ export const useLogin = () =>{
         const {userDetails} = response.data
 
         localStorage.setItem("user", JSON.stringify(userDetails))
+        toast.success("Sesion iniciada con exito!!!")
         navigate("/")
     }
     return{
