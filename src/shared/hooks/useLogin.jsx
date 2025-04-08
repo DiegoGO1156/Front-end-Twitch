@@ -15,6 +15,7 @@ export const useLogin = () =>{
         const response = await loginRequest({email, password})
 
         setLoading(false)
+        
         console.log(response)
 
         if(response.error){

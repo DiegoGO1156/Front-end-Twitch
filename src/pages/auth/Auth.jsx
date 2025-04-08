@@ -8,14 +8,14 @@ export const Auth = () => {
 
     const [isLogin, setIsLogin] = useState(true)
 
-    const handlerAuthPageToggle = () =>{
+    const handleAuthPageToggle = () =>{
         setIsLogin((prev) => !prev)
     }
 
   return (
     <div className="auth-container">
         {isLogin ? (
-            <Login switchAuthHandler={handlerAuthPageToggle}/>
+            <Login switchAuthHandler={handleAuthPageToggle}/>
         ) : (
             register
         )}

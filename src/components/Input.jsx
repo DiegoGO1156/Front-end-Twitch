@@ -1,52 +1,51 @@
 
-
 export const Input = ({
-    field, 
+    field,
     label,
     value,
     onChangeHandler,
-    type, 
-    showErrorMessage, 
+    type,
+    showErrorMessage,
     validationMessage,
     onBlurHandler,
     textArea
 }) =>{
-    const handleValueChange = (event) =>{
-        onChangeHandler(event.target.value, field)
+    
+    const handleValueChange = (event) => {
+        onChangeHandler(event.target.value, field);
     }
 
-    const handlerInputBlur = (event) =>{
-        onBlurHandler(event.target.value, field)
+    const handleInputBlur = (event) => {
+        onBlurHandler(event.target.value, field);
     }
 
     return (
         <>
-
-            <div className="auth-from-label">
+            <div className="auth-form-label">
                 <span>{label}</span>
             </div>
             <div>
-                { textArea ? (
-                    <textArea
-                        type = {type}
-                        value = {value}
-                        onChange = {handleValueChange}
-                        onBlur = {handlerInputBlur}
-                        rows = {5}
-                        style = {{maxWidth: "400px"}}
+                {textArea ? (
+                    <textarea
+                        type={type}
+                        value={value}
+                        onChange={handleValueChange}
+                        onBlur={handleInputBlur}
+                        rows={5}
+                        style={{ maxWidth: '400px'}}
                     />
                 ) : (
-                    <Input
-                        type = {type}
-                        value = {value}
-                        onChange = {handleValueChange}
-                        onBlur = {handlerInputBlur}
+                    <input
+                        type={type}
+                        value={value}
+                        onChange={handleValueChange}
+                        onBlur={handleInputBlur}
                     />
                 )}
-            </div>
                 <span className="auth-form-validation-message">
                     {showErrorMessage && validationMessage}
                 </span>
+            </div>
         </>
     )
 }
