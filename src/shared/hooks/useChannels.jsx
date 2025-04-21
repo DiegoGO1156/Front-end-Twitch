@@ -1,6 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { getFollowedChannels, getChannels as getRequestChannels, getFollowedChannels as getRequestFollowedChannels} from "../../service/api";
+import { getChannels as getRequestChannels, getFollowedChannels} from "../../service/api";
 
 export const useChannels = ()=>{
     const [channels, setChannels] = useState(null)
@@ -31,7 +31,7 @@ export const useChannels = ()=>{
 
         setChannels({
             channels: channelsData.data.channels,
-            followedChannelsData: followedChannelsData.data.channels.filter(channel => 
+            followedChannels: channelsData.data.channels.filter(channel => 
                 followedChannelsData.data.followedChannels.includes(channel.id)
             )
         })
@@ -40,8 +40,8 @@ export const useChannels = ()=>{
     return{
         getChannels,
         isFetching: !Boolean(channels),
-        allChannels: channels.channels,
-        followedChannels: channels.followedChannels
+        allChannels: channels?.channels,
+        followedChannels: channels?.followedChannels
     }
 
 }

@@ -1,17 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { ChannelCard } from "./ChannelCard";
 
-export const Channels = ({channels}) =>{
+export const Channels = ({channels}) => {
+    
     const navigate = useNavigate()
-    const handleNavigateToChannel = (id) =>{
+
+    const handleNavigateToChannel = (id) => {
         navigate(`/channel/${id}`)
     }
 
-    return(
+    return (
         <div className="channels-container">
-            {channels.map((c) =>{
-                <ChannelCard 
+            { channels.map((c) => (
+                <ChannelCard
                     key={c.id}
                     id={c.id}
                     title={c.title}
@@ -20,7 +21,7 @@ export const Channels = ({channels}) =>{
                     avatarUrl={c.avatarUrl}
                     navigateToChannelHandler={handleNavigateToChannel}
                 />
-            })}
+            ))}
         </div>
     )
 }
