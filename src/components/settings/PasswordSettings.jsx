@@ -1,53 +1,56 @@
 import { useState } from "react";
-import { messageValidatePassword, validatePassword } from "../../shared/validators";
-import { useChangePassword } from "../../shared/hooks/useChangePassword";
-import { Input } from "../Input";
+import { messageValidatePassword, validatePassword } from "../../shared/validators"
+import { useChangePassword } from "../../shared/hooks";
+import { Input } from '../Input'
 
 const inputs = [
     {
-        field: "password",
-        label: "Password",
-        validationMessage: validatePassword,
-        type: "password"
-    },{
-        field: "NewPassword",
-        label: "New Password",
+        field: 'password',
+        label: 'Password',
         validationMessage: messageValidatePassword,
-        type: "password"
+        type: 'password'
+    },
+    {
+        field: 'newPassword',
+        label: 'New Password',
+        validationMessage: messageValidatePassword,
+        type: 'password'
     }
 ]
 
-export const PasswordSettings = () =>{
-    const [formState, setFormState] = useState({
+export const PasswordSettings = () => {
+    const [formState, setFormState ] = useState({
         password: {
             isValid: false,
             showError: false,
-            value: ""
+            value: ''
         },
-        newPassword:{
+        newPassword: {
             isValid: false,
             showError: false,
-            value: ""
+            value: ''
         }
     })
 
-    const {changePassword} = useChangePassword()
+    const { changePassword } = useChangePassword();
 
     const handleInputValueChange = (value, field) => {
-        setFormState((preState) => ({
-            ...preState,
+        setFormState((prevState) => ({
+            ...prevState,
             [field]: {
-                ...preState[field],
+                ...prevState[field],
                 value
             }
         }))
     }
 
-    const handelInputValidationOnBlur = (value, field) =>{
+    const handleInputValidationOnBlur = (value, field) => {
+
         let isValid = validatePassword(value)
-        setFormState((prevState) =>({
+
+        setFormState((prevState) => ({
             ...prevState,
-            [field]:{
+            [field]: {
                 ...prevState[field],
                 isValid,
                 showError: !isValid
@@ -55,10 +58,11 @@ export const PasswordSettings = () =>{
         }))
     }
 
-    const isSubmintButtonDisabled = !formState.password.isValid || !formState.newPassword.isValid
+    const isSubmitButtonDisabled = !formState.password.isValid ||
+        !formState.newPassword.isValid
 
-    const handleFormSubmit = (event) =>{
-        event.preventDefault()
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
         changePassword(formState.password.value, formState.newPassword.value)
     }
 
@@ -71,17 +75,16 @@ export const PasswordSettings = () =>{
                     label={input.label}
                     value={formState[input.field].value}
                     onChangeHandler={handleInputValueChange}
-                    onBlurHandler={handelInputValidationOnBlur}
+                    onBlurHandler={handleInputValidationOnBlur}
                     showErrorMessage={formState[input.field].showError}
                     validationMessage={input.validationMessage}
                     type={input.type}
-                    textArea={input.textArea}
+                    textarea={input.textarea}
                 />
             ))}
-            <button onClick={handleFormSubmit} disabled={isSubmintButtonDisabled}>
+            <button onClick={handleFormSubmit} disabled={isSubmitButtonDisabled}>
                 Actualizar Contraseña
             </button>
         </form>
     )
 }
-

@@ -13,15 +13,15 @@ export const useChannelSettings = () =>{
                 response.e?.response?.data || "Ocurrio un error al intentar obtener la data del canal"
             )
         }
+        setChannelSettings({
+            username: response.data.username,
+            title: response.data.title,
+            description: response.data.description,
+            avatarUrl: response.data.avatarUrl,
+            steamKey: response.data.steamKey
+        })
     }
 
-    setChannelSettings({
-        username: response.data.username,
-        title: response.data.title,
-        description: response.data.description,
-        avatarUrl: response.data.avatarUrl,
-        steamKey: response.data.steamKey
-    })
 
     const saveSettings = async (data) =>{
         const response  = await updateChannelSettings(data)

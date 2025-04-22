@@ -1,17 +1,19 @@
 import toast from "react-hot-toast";
 import { changePassword as changePasswordRequest } from "../../service";
 
-export const useChangePassword = () =>{
-    const changePass = async (password, newPassWord) =>{
-        const responseData = await changePasswordRequest({password, newPassWord})
-        if(responseData.error){
+export const useChangePassword = () => {
+
+    const changePassword = async (password, newPassword) => {
+        const responseData = await changePasswordRequest({ password, newPassword });
+        if (responseData.error) {
             return toast.error(
-                responseData.e?.response?.data || "No fue posible actualizar la contraseña"
-            )
+                responseData.e?.response?.data || 'No fue posible actualizar el password'
+            );
         }
-        toast.success("PassWord actualizada con exito!")
+        toast.success('Password actualizada correctamente')
     }
-    return{
-        changePass
+
+    return {
+        changePassword
     }
 }
