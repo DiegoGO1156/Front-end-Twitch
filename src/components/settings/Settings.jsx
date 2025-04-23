@@ -10,6 +10,7 @@ export const Settings = () =>{
     if(isFetching){
         return <LoadingSpinner/>
     }
+    console.log(channelSettings.streamKey)
     return (
         <div className="settings-container">
             <span>Settings</span>

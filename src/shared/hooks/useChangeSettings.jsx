@@ -2,42 +2,45 @@ import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { getChannelsSettings, updateChannelSettings } from "../../service";
 
-export const useChannelSettings = () =>{
-    const [channelSettings, setChannelSettings] = useState()
+export const useChannelSettings = () => {
 
-    const fetchChannelSettings = async() =>{
-        const response = await getChannelsSettings()
+    const [ channelSettings, setChannelSettings ] = useState();
+
+    const fetchChannelSettings = async () => {
+        const response = await getChannelsSettings();
 
         if(response.error){
             return toast.error(
-                response.e?.response?.data || "Ocurrio un error al intentar obtener la data del canal"
+                response.e?.response?.data || 'Ocurrio un error al obtener la data del canal'
             )
         }
+
         setChannelSettings({
             username: response.data.username,
             title: response.data.title,
             description: response.data.description,
             avatarUrl: response.data.avatarUrl,
-            steamKey: response.data.steamKey
+            streamKey: response.data.streamKey
         })
     }
 
+    const saveSettings = async (data) => {
+        const response = await updateChannelSettings(data)
 
-    const saveSettings = async (data) =>{
-        const response  = await updateChannelSettings(data)
         if(response.error){
             return toast.error(
-                response.e?.response?.data || "Ocurrio un error al actualizar la información"
+                response.e?.response?.data || 'Ocurrio un error al actualizar la información del canal'
             )
         }
-        toast.success("Información actualizada con exito!")
+
+        toast.success('Información actualizada correctamente')
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         fetchChannelSettings()
-    }, [])
+    },[])
 
-    return({
+    return ({
         isFetching: !channelSettings,
         channelSettings,
         saveSettings

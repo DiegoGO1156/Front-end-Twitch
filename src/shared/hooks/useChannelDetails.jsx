@@ -7,7 +7,7 @@ export const useChannelDetails = () =>{
     const [channelDetails, setChannelDetails] = useState()
 
     const getChannelDetails = async(id) =>{
-        const responseData = await getChannelDetails(id)
+        const responseData = await getChannelDetailsRequest(id)
 
         if(responseData.error){
             return toast.error(
